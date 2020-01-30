@@ -11,23 +11,26 @@ var canvWith = 500 ;
 var canvHeight = 500 ;
 
 $(document).ready(function() {
+    /*** creation des positions par defaut ***/
     var p = createDefaultPositions() ;
     createRondomPositions(p) ;
+    /*** initialisation de la canvas ***/
     var cnv=document.getElementById("canv");
     var ctx=cnv.getContext("2d");
-    cnv.addEventListener("mousedown", function () {
+    cnv.addEventListener("mousemove", function () {
+
+        /*** recuperation des coordonnée de la canvas ***/
         (function () {
             var rect = cnv.getBoundingClientRect() ;
             var x = event.clientX -  rect.left ;
             var y = event.clientY - rect.top ;
             console.log("Coordinate x: " + x,
                 "Coordinate y: " + y);
-            $.each(p , function (k , v) {
-                 if (contains(p,x,y)) {
-                     ctx.fillStyle = "green" ;
-                     ctx.fillRect(v.x , v.y ,rectWith , rectHeight);
-                 }
-            }) ;
+
+            /*** si le les coordonnées du pointeur de la sourie existe dans la liste des positions ***/
+            /*** modifié la couleur du rectangle ***/
+                 contains(p,x,y,ctx) ;
+
 
         })(cnv , event , p);
     }) ;
@@ -51,7 +54,7 @@ function disignRect(i , tabPos , ctx) {
     setTimeCreation =  setTimeout(function () {
 
         if (i >= 0 && i <= tabPos.length -1){
-            ctx.fillStyle="yellow";
+            ctx.fillStyle= "#efe5da";
             ctx.strokeStyle="black";
             ctx.textAlign="center";
             ctx.textBaseline="middle";
@@ -72,7 +75,7 @@ function createDefaultPositions(){
     for (var i = 0 ; i < nbrRect ; i ++){
 
         if ((startPosX < canvWith) && (startLigne == 1)){
-            var p ={ x : startPosX , y : startPosY  , width : 100 , height :100} ;
+            var p ={ x : startPosX , y : startPosY  , width : rectWith , height :rectHeight} ;
             tab.push(p);
 
         }else{
@@ -81,7 +84,7 @@ function createDefaultPositions(){
                 startLigne++
             }
             startPosY = rectWith * (startLigne -1) ;
-            var p ={ x : startPosX , y : startPosY } ;
+            var p ={ x : startPosX , y : startPosY , width : rectWith , height :rectHeight} ;
 
             tab.push(p);
             startPosX += rectWith ;
@@ -96,11 +99,25 @@ function createDefaultPositions(){
     return tab ;
 }
 
-function contains(p , x , y) {
+function contains(p , x , y , ctx) {
     $.each(p , function (k , v) {
         if (x >= v.x &&
             x <= v.x + v.width &&
             y >= v.y &&
-            y <= v.y + v.height ) return true ;
+            y <= v.y + v.height ) {
+            ctx.fillStyle = getRandomColor() ;
+            ctx.fillRect(v.x , v.y ,rectWith , rectHeight);
+            return false
+
+        }
     }) ;
+}
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
 }
