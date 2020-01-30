@@ -10,3 +10,13 @@ canvas{
     display : block !important; ;
     margin : 30px auto ;
 }
+
+#countDown{
+    text-align: center;
+    font-size: 100px;
+}
+
+#msgToStart{
+    text-align: center;
+    font-size: 50px;
+}

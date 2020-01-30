@@ -6,18 +6,51 @@ var startLigne = 1 ;
 var startCol = 5 ;
 var tab = [] ;
 var position = {x : 0 , y : 0} ;
-var nbrRect = 25 ;
+var nbrRect = 10 ;
 var canvWith = 500 ;
 var canvHeight = 500 ;
+var timeleft = 3;
+var cnv ;
+var ctx ;
+var p ;
 
+/***
+ * start programme
+ */
 $(document).ready(function() {
     /*** creation des positions par defaut ***/
-    var p = createDefaultPositions() ;
+    p = createDefaultPositions() ;
     createRondomPositions(p) ;
     /*** initialisation de la canvas ***/
-    var cnv=document.getElementById("canv");
-    var ctx=cnv.getContext("2d");
-    cnv.addEventListener("mousemove", function () {
+    cnv=document.getElementById("canv");
+    ctx=cnv.getContext("2d");
+
+    manageEventCanvas(ctx,p,cnv);
+   // disignRectWithTimeOut(0 , p , ctx);
+    disignRect(p,ctx);
+
+
+});
+
+/***
+ * create a rondom  positions
+ * @param p
+ */
+function createRondomPositions(p) {
+
+        for (let i = p.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [p[i], p[j]] = [p[j], p[i]];
+        }
+}
+
+/***
+ * manage Event canvas
+ * @param ctx
+ * @param tabPos
+ */
+function manageEventCanvas(ctx ,tabPos , cnv) {
+    cnv.addEventListener("mousedown", function () {
 
         /*** recuperation des coordonnée de la canvas ***/
         (function () {
@@ -29,32 +62,24 @@ $(document).ready(function() {
 
             /*** si le les coordonnées du pointeur de la sourie existe dans la liste des positions ***/
             /*** modifié la couleur du rectangle ***/
-                 contains(p,x,y,ctx) ;
+            contains(p,x,y,ctx) ;
 
 
         })(cnv , event , p);
     }) ;
-
-    disignRect(0 , p , ctx);
-
-
-
-
-});
-
-function createRondomPositions(p) {
-
-        for (let i = p.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [p[i], p[j]] = [p[j], p[i]];
-        }
 }
 
-function disignRect(i , tabPos , ctx) {
+/***
+ * manage design rectancle with time out
+ * @param i
+ * @param tabPos
+ * @param ctx
+ */
+function disignRectWithTimeOut(i , tabPos , ctx) {
     setTimeCreation =  setTimeout(function () {
 
         if (i >= 0 && i <= tabPos.length -1){
-            ctx.fillStyle= "#efe5da";
+            ctx.fillStyle= "#ffff99";
             ctx.strokeStyle="black";
             ctx.textAlign="center";
             ctx.textBaseline="middle";
@@ -63,13 +88,32 @@ function disignRect(i , tabPos , ctx) {
             ctx.strokeRect(tabPos[i].x , tabPos[i].y , 100 , 100);
 
             i++ ;
-            disignRect(i , tabPos , ctx);
+            disignRectWithTimeOut(i , tabPos , ctx);
 
         }
 
-    }, 500) ;
+    }, 2000) ;
 }
 
+function disignRect(tabPos , ctx) {
+
+    for ( let i =0 ; i < tabPos.length ; i++){
+        ctx.fillStyle= "#efe5da";
+        ctx.strokeStyle="black";
+        ctx.textAlign="center";
+        ctx.textBaseline="middle";
+        ctx.lineWidth=0.5;
+        ctx.fillRect(tabPos[i].x , tabPos[i].y , 100 , 100) ;
+        ctx.strokeRect(tabPos[i].x , tabPos[i].y , 100 , 100);
+    }
+}
+
+
+
+/***
+ * init and create default position for game floor
+ * @returns {[]}
+ */
 function createDefaultPositions(){
 
     for (var i = 0 ; i < nbrRect ; i ++){
@@ -99,6 +143,13 @@ function createDefaultPositions(){
     return tab ;
 }
 
+/***
+ * function to check if de coordinate of mousse pointer existe in positions table
+ * @param p
+ * @param x
+ * @param y
+ * @param ctx
+ */
 function contains(p , x , y , ctx) {
     $.each(p , function (k , v) {
         if (x >= v.x &&
@@ -113,6 +164,10 @@ function contains(p , x , y , ctx) {
     }) ;
 }
 
+/***
+ * get a rondom for colors
+ * @returns {string}
+ */
 function getRandomColor() {
     var letters = '0123456789ABCDEF';
     var color = '#';
@@ -120,4 +175,24 @@ function getRandomColor() {
         color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
+}
+
+
+function playCountDown() {
+    disignRect(p,ctx);
+    var downloadTimer = setInterval(function(){
+        document.getElementById("countDown").innerHTML = timeleft ;
+        timeleft -= 1;
+        if(timeleft < 0){
+            timeleft = 3 ;
+            clearInterval(downloadTimer);
+            document.getElementById("countDown").innerHTML = "Start memoring case" ;
+            disignRectWithTimeOut(0,p,ctx);
+        }
+    }, 1000);
+}
+
+
+function checkResul(p ,ctx) {
+
 }
