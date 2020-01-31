@@ -13,11 +13,15 @@ var timeleft = 3;
 var cnv ;
 var ctx ;
 var p ;
+var countClikc = [];
+
+
 
 /***
  * start programme
  */
 $(document).ready(function() {
+
     /*** creation des positions par defaut ***/
     p = createDefaultPositions() ;
     createRondomPositions(p) ;
@@ -44,12 +48,14 @@ function createRondomPositions(p) {
         }
 }
 
+
+
 /***
  * manage Event canvas
  * @param ctx
  * @param tabPos
  */
-function manageEventCanvas(ctx ,tabPos , cnv) {
+function manageEventCanvas(ctx ,tabPos ,cnv) {
     cnv.addEventListener("mousedown", function () {
 
         /*** recuperation des coordonnée de la canvas ***/
@@ -62,7 +68,8 @@ function manageEventCanvas(ctx ,tabPos , cnv) {
 
             /*** si le les coordonnées du pointeur de la sourie existe dans la liste des positions ***/
             /*** modifié la couleur du rectangle ***/
-            contains(p,x,y,ctx) ;
+            //contains(p,x,y,ctx) ;
+            checkResultat(p,x,y,ctx,countClikc.length);
 
 
         })(cnv , event , p);
@@ -179,6 +186,9 @@ function getRandomColor() {
 
 
 function playCountDown() {
+    //initialise variable count click
+    i=0 ;
+    countClikc = [];
     disignRect(p,ctx);
     var downloadTimer = setInterval(function(){
         document.getElementById("countDown").innerHTML = timeleft ;
@@ -193,6 +203,20 @@ function playCountDown() {
 }
 
 
-function checkResul(p ,ctx) {
+function checkResultat(p ,x,y,ctx,i) {
+
+        if (x >= p[i].x &&
+            x <= p[i].x + p[i].width &&
+            y >= p[i].y &&
+            y <= p[i].y + p[i].height ) {
+            ctx.fillStyle = "green" ;
+            ctx.fillRect(p[i].x , p[i].y ,rectWith , rectHeight);
+            countClikc.push(i++) ;
+        } else {
+            ctx.fillStyle = "red" ;
+            ctx.fillRect(p[i].x , p[i].y ,rectWith , rectHeight);
+            countClikc.push(i++) ;
+        }
+
 
 }
