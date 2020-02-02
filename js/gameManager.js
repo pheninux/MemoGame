@@ -1,18 +1,12 @@
-// var rectWith = 100 ;
-// var rectHeight = 100 ;
-// var startPosX = 0;
-// var startPosY = 0;
-// var startLigne = 1 ;
 var ctx;
-var p;
 var countClikc = [];
 var tabRectangles = [];
+var floorRects = [];
+var enableClickInFloor = true ;
+var nbrErrorCase = 0;
 
-// var nbrRect = 10 ;
-// var canvWith = 500 ;
 
-// var timeleft = 3;
-// var cnv ;
+
 
 
 /***
@@ -21,15 +15,16 @@ var tabRectangles = [];
 $(document).ready(function () {
 
     /*** creation des positions par defaut ***/
-    p = createDefaultPositions();
-    createRondomPositions(p);
+    createFloorDefaultPositions();
+    createRondomFullRectPos(floorRects);
+    createRondomLevelRectPos(floorRects);
     /*** initialisation de la canvas ***/
     cnv = document.getElementById("canv");
     ctx = cnv.getContext("2d");
 
-    manageEventCanvas(ctx, p, cnv);
+    manageEventCanvas(ctx,cnv);
     // disignRectWithTimeOut(0 , p , ctx);
-    disignRect(p, ctx);
+    disignfloor(floorRects, ctx);
 
 
 });
@@ -38,13 +33,24 @@ $(document).ready(function () {
  * create a rondom  positions
  * @param p
  */
-function createRondomPositions(p) {
+function createRondomFullRectPos(floorRects) {
 
-    for (let i = p.length - 1; i > 0; i--) {
+    for (let i = floorRects.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [p[i], p[j]] = [p[j], p[i]];
+        [floorRects[i], floorRects[j]] = [floorRects[j], floorRects[i]];
     }
 }
+
+/***
+ * create rondom value of level case from a full floor case
+ * @param tabFloorRects
+ */
+function createRondomLevelRectPos(floorRects) {
+
+    tabRectangles = floorRects.slice(0 , config.nbrRect);
+   return tabRectangles ;
+}
+
 
 
 /***
@@ -52,24 +58,26 @@ function createRondomPositions(p) {
  * @param ctx
  * @param tabPos
  */
-function manageEventCanvas(ctx, tabPos, cnv) {
+function manageEventCanvas(ctx,cnv) {
     cnv.addEventListener("mousedown", function () {
 
+        if (enableClickInFloor){
+            (function () {
+                var rect = cnv.getBoundingClientRect();
+                var x = event.clientX - rect.left;
+                var y = event.clientY - rect.top;
+                console.log("Coordinate x: " + x,
+                    "Coordinate y: " + y);
+
+                /*** si le les coordonnées du pointeur de la sourie existe dans la liste des positions ***/
+                /*** modifié la couleur du rectangle ***/
+                //contains(p,x,y,ctx) ;
+                checkResultat(tabRectangles, x, y, ctx, countClikc.length);
+
+
+            })(cnv, event, tabRectangles);
+        }
         /*** recuperation des coordonnée de la canvas ***/
-        (function () {
-            var rect = cnv.getBoundingClientRect();
-            var x = event.clientX - rect.left;
-            var y = event.clientY - rect.top;
-            console.log("Coordinate x: " + x,
-                "Coordinate y: " + y);
-
-            /*** si le les coordonnées du pointeur de la sourie existe dans la liste des positions ***/
-            /*** modifié la couleur du rectangle ***/
-            //contains(p,x,y,ctx) ;
-            checkResultat(p, x, y, ctx, countClikc.length);
-
-
-        })(cnv, event, p);
     });
 }
 
@@ -79,36 +87,40 @@ function manageEventCanvas(ctx, tabPos, cnv) {
  * @param tabPos
  * @param ctx
  */
-function disignRectWithTimeOut(i, tabPos, ctx) {
+function disignRectWithTimeOut(idx, tabRectangles, ctx) {
     setTimeCreation = setTimeout(function () {
 
-        if (i >= 0 && i <= tabPos.length - 1) {
-            ctx.fillStyle = "#ffff99";
+        if (idx >= 0 && idx <= tabRectangles.length - 1) {
+            ctx.fillStyle = tabRectangles[idx]._color;
             ctx.strokeStyle = "black";
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
             ctx.lineWidth = 0.5;
-            ctx.fillRect(tabPos[i].x, tabPos[i].y, 100, 100);
-            ctx.strokeRect(tabPos[i].x, tabPos[i].y, 100, 100);
+            ctx.fillRect(tabRectangles[idx]._position.x, tabRectangles[idx]._position.y, tabRectangles[idx]._width, tabRectangles[idx]._height);
+            ctx.strokeRect(tabRectangles[idx]._position.x, tabRectangles[idx]._position.y, tabRectangles[idx]._width, tabRectangles[idx]._height);
 
-            i++;
-            disignRectWithTimeOut(i, tabPos, ctx);
+            idx++;
+            disignRectWithTimeOut(idx, tabRectangles, ctx);
 
         }
 
     }, 2000);
 }
 
-function disignRect(tabPos, ctx) {
+function disignRect(ctx, tabRects, i) {
+    ctx.fillStyle = "#efe5da";
+    ctx.strokeStyle = "black";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.lineWidth = 0.5;
+    ctx.fillRect(tabRects[i]._position.x, tabRects[i]._position.y, tabRects[i]._width, tabRects[i]._height);
+    ctx.strokeRect(tabRects[i]._position.x, tabRects[i]._position.y, tabRects[i]._width, tabRects[i]._height);
+}
 
-    for (let i = 0; i < tabPos.length; i++) {
-        ctx.fillStyle = "#efe5da";
-        ctx.strokeStyle = "black";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.lineWidth = 0.5;
-        ctx.fillRect(tabPos[i].x, tabPos[i].y, 100, 100);
-        ctx.strokeRect(tabPos[i].x, tabPos[i].y, 100, 100);
+function disignfloor(tabRects, ctx) {
+
+    for (let i = 0; i < tabRects.length; i++) {
+        disignRect(ctx, tabRects, i);
     }
 }
 
@@ -117,17 +129,16 @@ function disignRect(tabPos, ctx) {
  * init and create default position for game floor
  * @returns {[]}
  */
-function createDefaultPositions() {
+function createFloorDefaultPositions() {
 
-    var rect;
+     var rect ;
 
-    for (var i = 0; i < nbrRect; i++) {
+    for (var i = 0; i < config.floor.nbrRect; i++) {
 
         if ((config.startPosX < config.canvasWidth) && (config.startLigne == 1)) {
-            //var p ={ x : startPosX , y : startPosY  , width : rectWith , height :rectHeight} ;
-            //var position  = new Position(config.startPosX , config.startPosY) ;
+
             rect = new MyRectangle(config.rectWidth, config.rectHeight, new Position(config.startPosX, config.startPosY), "yellow");
-            tabRectangles.push(rect);
+            floorRects.push(rect);
 
         } else {
             // test if we arrive at the end of first line , we passe to second
@@ -136,9 +147,9 @@ function createDefaultPositions() {
                 config.startLigne++
             }
             config.startPosY = config.rectWidth * (config.startLigne - 1);
-            //var p = {x: startPosX, y: startPosY, width: rectWith, height: rectHeight};
+
             rect = new MyRectangle(config.rectWidth, config.rectHeight, new Position(config.startPosX, config.startPosY), "yellow");
-            tabRectangles.push(rect);
+            floorRects.push(rect);
             config.startPosX += config.rectWidth;
 
 
@@ -148,29 +159,9 @@ function createDefaultPositions() {
         }
 
     }
-    return tabRectangles;
+    return floorRects;
 }
 
-/***
- * function to check if de coordinate of mousse pointer existe in positions table
- * @param p
- * @param x
- * @param y
- * @param ctx
- */
-function contains(p, x, y, ctx) {
-    $.each(p, function (k, v) {
-        if (x >= v.x &&
-            x <= v.x + v.width &&
-            y >= v.y &&
-            y <= v.y + v.height) {
-            ctx.fillStyle = getRandomColor();
-            ctx.fillRect(v.x, v.y, rectWith, rectHeight);
-            return false
-
-        }
-    });
-}
 
 /***
  * get a rondom for colors
@@ -185,45 +176,83 @@ function getRandomColor() {
     return color;
 }
 
-
+/***
+ * play a count dwon and show message to start memoring case
+ */
 function playCountDown() {
+
+    // initialise enable click in canavas floor and nbr of errors
+    enableClickInFloor = true ;
+    nbrErrorCase = 0 ;
     //initialise variable count click
     i = 0;
     countClikc = [];
-    disignRect(p, ctx);
+    disignfloor(floorRects, ctx);
+    // re create new rondom suite
+    createRondomFullRectPos(floorRects);
+    createRondomLevelRectPos(floorRects);
+
     var downloadTimer = setInterval(function () {
-        document.getElementById("countDown").innerHTML = timeleft;
-        timeleft -= 1;
-        if (timeleft < 0) {
-            timeleft = 3;
+        document.getElementById("countDown").innerHTML = config.countDown;
+        config.countDown -= 1;
+        if (config.countDown < 0) {
+            config.countDown = 3;
             clearInterval(downloadTimer);
             document.getElementById("countDown").innerHTML = "Start memoring case";
-            disignRectWithTimeOut(0, p, ctx);
+            disignRectWithTimeOut(0, tabRectangles, ctx);
         }
     }, 1000);
 }
 
 
-function checkResultat(p, x, y, ctx, i) {
+function checkResultat(tabRects, x, y, ctx, i) {
 
-    if (x >= p[i].x &&
-        x <= p[i].x + p[i].width &&
-        y >= p[i].y &&
-        y <= p[i].y + p[i].height) {
+    if (x >= tabRects[i]._position.x &&
+        x <= tabRects[i]._position.x + tabRects[i]._width &&
+        y >= tabRects[i]._position.y &&
+        y <= tabRects[i]._position.y + tabRects[i]._height) {
         ctx.fillStyle = "green";
         ctx.strokeStyle = "black";
-        ctx.lineWidth = 0.5
-        ctx.fillRect(p[i].x, p[i].y, p[i].width, p[i].height);
-        ctx.strokeRect(p[i].x, p[i].y, p[i].width, p[i].height);
+        ctx.lineWidth = 0.5 ;
+        ctx.fillRect(tabRects[i]._position.x, tabRects[i]._position.y, tabRects[i]._width, tabRects[i]._height);
+        ctx.strokeRect(tabRects[i]._position.x, tabRects[i]._position.y, tabRects[i]._width, tabRects[i]._height);
         countClikc.push(i++);
+        if (countClikc.length == tabRects.length){
+            enableClickInFloor = false ;
+            if (nbrErrorCase == 0) {
+                playSongWin() ;
+                config.nbrRect ++ ;
+            }else {
+                playSongLose() ;
+            }
+        }
+
     } else {
         ctx.fillStyle = "red";
         ctx.strokeStyle = "black";
         ctx.lineWidth = 0.5
-        ctx.fillRect(p[i].x, p[i].y, p[i].width, p[i].height);
-        ctx.strokeRect(p[i].x, p[i].y, p[i].width, p[i].height);
+        ctx.fillRect(tabRects[i]._position.x, tabRects[i]._position.y, tabRects[i]._width, tabRects[i]._height);
+        ctx.strokeRect(tabRects[i]._position.x, tabRects[i]._position.y, tabRects[i]._width, tabRects[i]._height);
         countClikc.push(i++);
+        nbrErrorCase ++ ;
+        if (countClikc.length == tabRects.length){
+            enableClickInFloor = false ;
+                playSongLose() ;
+
+        }
+
     }
 
+
+}
+
+function playSongWin() {
+    var audio = new Audio('http://soundbible.com/mp3/Ta%20Da-SoundBible.com-1884170640.mp3');
+    audio.play();
+}
+
+function playSongLose() {
+    var audio = new Audio('http://soundbible.com/mp3/Sad_Trombone-Joe_Lamb-665429450.mp3');
+    audio.play();
 
 }

@@ -4,8 +4,7 @@ class MyRectangle {
     _height ;
     _position ;
     _color ;
-    constructor() {
-    }
+
     constructor(width, height, position, color) {
         this._width = width;
         this._height = height;
