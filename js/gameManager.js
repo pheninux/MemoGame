@@ -2,10 +2,8 @@ var ctx;
 var countClikc = [];
 var tabRectangles = [];
 var floorRects = [];
-var enableClickInFloor = true ;
+var enableClickInFloor = false ;
 var nbrErrorCase = 0;
-
-
 
 
 
@@ -16,15 +14,20 @@ $(document).ready(function () {
 
     /*** creation des positions par defaut ***/
     createFloorDefaultPositions();
+    /*** creation des rondom pour full positions  ***/
     createRondomFullRectPos(floorRects);
+    /*** selection du nbr de case de jeux parmis le full rondom pos ***/
     createRondomLevelRectPos(floorRects);
+
     /*** initialisation de la canvas ***/
     cnv = document.getElementById("canv");
     ctx = cnv.getContext("2d");
 
     manageEventCanvas(ctx,cnv);
     // disignRectWithTimeOut(0 , p , ctx);
-    disignfloor(floorRects, ctx);
+    disignfloor(floorRects, ctx , config.canvas.style.fillStyle ,
+        config.canvas.style.strokeStyle , config.canvas.style.textAlign ,
+        config.canvas.style.textBaseline ,config.canvas.style.lineWidth);
 
 
 });
@@ -51,8 +54,6 @@ function createRondomLevelRectPos(floorRects) {
    return tabRectangles ;
 }
 
-
-
 /***
  * manage Event canvas
  * @param ctx
@@ -63,22 +64,44 @@ function manageEventCanvas(ctx,cnv) {
 
         if (enableClickInFloor){
             (function () {
-                var rect = cnv.getBoundingClientRect();
-                var x = event.clientX - rect.left;
-                var y = event.clientY - rect.top;
-                console.log("Coordinate x: " + x,
-                    "Coordinate y: " + y);
-
-                /*** si le les coordonnées du pointeur de la sourie existe dans la liste des positions ***/
+                var {x, y} = getCoordinatePointer();
+                /*** si les coordonnées du pointeur de la sourie existe dans la liste des positions ***/
                 /*** modifié la couleur du rectangle ***/
-                //contains(p,x,y,ctx) ;
-                checkResultat(tabRectangles, x, y, ctx, countClikc.length);
-
-
+                checkResultat(tabRectangles, x, y, ctx, countClikc.length , config.rect.style.inCheck , config.rect.style.inCheck
+                    , config.rect.style.textAlign , config.rect.style.textBaseline ,config.rect.style.lineWidth) ;
             })(cnv, event, tabRectangles);
         }
-        /*** recuperation des coordonnée de la canvas ***/
     });
+    cnv.addEventListener("mouseMoveOutside",function () {
+
+        (function () {
+           var {x, y} = getCoordinatePointer() ;
+           /* for (let i=0 ; i < floorRects.length ; i++){
+                if (contains(x,floorRects,i,y)){
+                 disignRect(ctx,floorRects,i , config.rect.style.hover.fillStyle , config.rect.style.hover.strokeStyle ,
+                     config.rect.style.textAlign , config.rect.style.textBaseline , config.rect.style.hover.lineWidth) ;
+                    break ;
+                }
+                continue ;
+            }*/
+
+        })(cnv, event, floorRects);
+
+    }) ;
+
+}
+
+/***
+ * get coordinate pointer
+ * @returns {{x: number, y: number}}
+ */
+function getCoordinatePointer() {
+    var rect = cnv.getBoundingClientRect();
+    var x = event.clientX - rect.left;
+    var y = event.clientY - rect.top;
+    console.log("Coordinate x: " + x,
+        "Coordinate y: " + y);
+    return {x, y};
 }
 
 /***
@@ -87,40 +110,55 @@ function manageEventCanvas(ctx,cnv) {
  * @param tabPos
  * @param ctx
  */
-function disignRectWithTimeOut(idx, tabRectangles, ctx) {
+function disignRectWithTimeOut(idx, tabRectangles, ctx ,fStyle , sStyle , tAlign , tBalign ,lWidht) {
     setTimeCreation = setTimeout(function () {
 
         if (idx >= 0 && idx <= tabRectangles.length - 1) {
-            ctx.fillStyle = tabRectangles[idx]._color;
-            ctx.strokeStyle = "black";
-            ctx.textAlign = "center";
-            ctx.textBaseline = "middle";
-            ctx.lineWidth = 0.5;
-            ctx.fillRect(tabRectangles[idx]._position.x, tabRectangles[idx]._position.y, tabRectangles[idx]._width, tabRectangles[idx]._height);
-            ctx.strokeRect(tabRectangles[idx]._position.x, tabRectangles[idx]._position.y, tabRectangles[idx]._width, tabRectangles[idx]._height);
-
+            disignRect(ctx, tabRectangles, idx ,fStyle , sStyle , tAlign , tBalign ,lWidht) ;
             idx++;
-            disignRectWithTimeOut(idx, tabRectangles, ctx);
+            disignRectWithTimeOut(idx, tabRectangles, ctx  ,fStyle , sStyle , tAlign , tBalign ,lWidht);
 
         }
 
     }, 2000);
 }
 
-function disignRect(ctx, tabRects, i) {
-    ctx.fillStyle = "#efe5da";
-    ctx.strokeStyle = "black";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.lineWidth = 0.5;
+/***
+ * disign rectangle with de specific properties
+ * @param ctx
+ * @param tabRects
+ * @param i
+ * @param fStyle
+ * @param sStyle
+ * @param tAlign
+ * @param tBalign
+ * @param lWidht
+ */
+function disignRect(ctx, tabRects, i , fStyle , sStyle , tAlign , tBalign ,lWidht) {
+
+    ctx.fillStyle = fStyle ;
+    ctx.strokeStyle = sStyle;
+    ctx.textAlign = tAlign;
+    ctx.textBaseline = tBalign;
+    ctx.lineWidth = lWidht;
     ctx.fillRect(tabRects[i]._position.x, tabRects[i]._position.y, tabRects[i]._width, tabRects[i]._height);
     ctx.strokeRect(tabRects[i]._position.x, tabRects[i]._position.y, tabRects[i]._width, tabRects[i]._height);
 }
 
-function disignfloor(tabRects, ctx) {
+/***
+ * disign floor canvas with the specific properties
+ * @param tabRects
+ * @param ctx
+ * @param fStyle
+ * @param sStyle
+ * @param tAlign
+ * @param tBalign
+ * @param lWidht
+ */
+function disignfloor(tabRects, ctx , fStyle , sStyle , tAlign , tBalign ,lWidht) {
 
     for (let i = 0; i < tabRects.length; i++) {
-        disignRect(ctx, tabRects, i);
+        disignRect(ctx, tabRects, i , fStyle , sStyle , tAlign , tBalign ,lWidht);
     }
 }
 
@@ -133,29 +171,29 @@ function createFloorDefaultPositions() {
 
      var rect ;
 
-    for (var i = 0; i < config.floor.nbrRect; i++) {
+    for (var i = 0; i < config.canvas.nbrRect; i++) {
 
-        if ((config.startPosX < config.canvasWidth) && (config.startLigne == 1)) {
+        if ((config.position.start.x < config.canvas.width) && (config.startLigne == 1)) {
 
-            rect = new MyRectangle(config.rectWidth, config.rectHeight, new Position(config.startPosX, config.startPosY), "yellow");
+            rect = new MyRectangle(config.rect.width, config.rect.height, new Position(config.position.start.x, config.position.start.y), config.rect.style.inStart.fillStyle);
             floorRects.push(rect);
 
         } else {
             // test if we arrive at the end of first line , we passe to second
-            if (config.startPosX == config.canvasWidth) {
-                config.startPosX = 0;
+            if (config.position.start.x == config.canvas.height) {
+                config.position.start.x = 0;
                 config.startLigne++
             }
-            config.startPosY = config.rectWidth * (config.startLigne - 1);
+            config.position.start.y = config.rect.width * (config.startLigne - 1);
 
-            rect = new MyRectangle(config.rectWidth, config.rectHeight, new Position(config.startPosX, config.startPosY), "yellow");
+            rect = new MyRectangle(config.rect.width, config.rect.height, new Position(config.position.start.x, config.position.start.y), "yellow");
             floorRects.push(rect);
-            config.startPosX += config.rectWidth;
+            config.position.start.x += config.rect.width;
 
 
         }
         if (config.startLigne == 1) {
-            config.startPosX += config.rectWidth;
+            config.position.start.x += config.rect.width;
         }
 
     }
@@ -187,7 +225,9 @@ function playCountDown() {
     //initialise variable count click
     i = 0;
     countClikc = [];
-    disignfloor(floorRects, ctx);
+    disignfloor(floorRects, ctx , config.canvas.style.fillStyle ,
+        config.canvas.style.strokeStyle , config.canvas.style.textAlign ,
+        config.canvas.style.textBaseline ,config.canvas.style.lineWidth);
     // re create new rondom suite
     createRondomFullRectPos(floorRects);
     createRondomLevelRectPos(floorRects);
@@ -199,40 +239,59 @@ function playCountDown() {
             config.countDown = 3;
             clearInterval(downloadTimer);
             document.getElementById("countDown").innerHTML = "Start memoring case";
-            disignRectWithTimeOut(0, tabRectangles, ctx);
+            disignRectWithTimeOut(0, tabRectangles, ctx , config.rect.style.inStart.fillStyle, config.rect.style.inStart.strokeStyle ,
+                config.rect.style.textAlign , config.rect.style.textBaseline , config.rect.style.lineWidth);
         }
     }, 1000);
 }
 
-
-function checkResultat(tabRects, x, y, ctx, i) {
-
-    if (x >= tabRects[i]._position.x &&
+/***
+ *  check if the coordiniate pointer exist in table of rectangle positions
+ * @param x
+ * @param tabRects
+ * @param i
+ * @param y
+ * @returns {boolean|boolean}
+ */
+function contains(x, tabRects, i, y) {
+    return x >= tabRects[i]._position.x &&
         x <= tabRects[i]._position.x + tabRects[i]._width &&
         y >= tabRects[i]._position.y &&
-        y <= tabRects[i]._position.y + tabRects[i]._height) {
-        ctx.fillStyle = "green";
-        ctx.strokeStyle = "black";
-        ctx.lineWidth = 0.5 ;
-        ctx.fillRect(tabRects[i]._position.x, tabRects[i]._position.y, tabRects[i]._width, tabRects[i]._height);
-        ctx.strokeRect(tabRects[i]._position.x, tabRects[i]._position.y, tabRects[i]._width, tabRects[i]._height);
+        y <= tabRects[i]._position.y + tabRects[i]._height;
+}
+
+/***
+ *  check if we are clicked in the write rectangle suite
+ * @param tabRects
+ * @param x
+ * @param y
+ * @param ctx
+ * @param i
+ * @param fStyle
+ * @param sStyle
+ * @param tAlign
+ * @param tBalign
+ * @param lWidht
+ */
+function checkResultat(tabRects, x, y, ctx, i , fStyle , sStyle , tAlign , tBalign ,lWidht) {
+
+    if (contains(x, tabRects, i, y)) {
+        disignRect(ctx, tabRects, i , fStyle.true.fillStyle , sStyle.true.strokeStyle
+            , tAlign , tBalign ,lWidht) ;
         countClikc.push(i++);
         if (countClikc.length == tabRects.length){
             enableClickInFloor = false ;
             if (nbrErrorCase == 0) {
-                playSongWin() ;
-                config.nbrRect ++ ;
+                playSong("win") ;
+                nextLevel();
             }else {
-                playSongLose() ;
+                playSong("lose") ;
             }
         }
 
     } else {
-        ctx.fillStyle = "red";
-        ctx.strokeStyle = "black";
-        ctx.lineWidth = 0.5
-        ctx.fillRect(tabRects[i]._position.x, tabRects[i]._position.y, tabRects[i]._width, tabRects[i]._height);
-        ctx.strokeRect(tabRects[i]._position.x, tabRects[i]._position.y, tabRects[i]._width, tabRects[i]._height);
+        disignRect(ctx, tabRects, i , fStyle.true.fillStyle , sStyle.true.strokeStyle
+            , tAlign , tBalign ,lWidht) ;
         countClikc.push(i++);
         nbrErrorCase ++ ;
         if (countClikc.length == tabRects.length){
@@ -246,13 +305,27 @@ function checkResultat(tabRects, x, y, ctx, i) {
 
 }
 
-function playSongWin() {
-    var audio = new Audio('http://soundbible.com/mp3/Ta%20Da-SoundBible.com-1884170640.mp3');
-    audio.play();
+/***
+ *   increment level
+ */
+function nextLevel() {
+    config.nbrRect ++ ;
 }
 
-function playSongLose() {
-    var audio = new Audio('http://soundbible.com/mp3/Sad_Trombone-Joe_Lamb-665429450.mp3');
-    audio.play();
+/***
+ * play a song compared to the parametre
+ * @param result
+ */
+function playSong(result) {
+    switch (result) {
+        case "win" :
+            var audio = new Audio('http://soundbible.com/mp3/Ta%20Da-SoundBible.com-1884170640.mp3');
+            audio.play();
+            break ;
+        case "lose" :
+            var audio = new Audio('http://soundbible.com/mp3/Sad_Trombone-Joe_Lamb-665429450.mp3');
+            audio.play();
+            break ;
+    }
 
 }

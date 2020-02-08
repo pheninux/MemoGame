@@ -2,13 +2,13 @@ class Player {
 
     _login ;
     _score ;
+    _level ;
 
-
-    constructor(login, score) {
+    constructor(login, score, level) {
         this._login = login;
         this._score = score;
+        this._level = level;
     }
-
 
     get login() {
         return this._login;
@@ -26,10 +26,13 @@ class Player {
         this._score = value;
     }
 
+    get level() {
+        return this._level;
+    }
 
-
-
-
+    set level(value) {
+        this._level = value;
+    }
 
 
 

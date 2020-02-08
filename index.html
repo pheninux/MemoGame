@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <script type="text/javascript" src="lib/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="lib/jquery/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/bootstrap/bootstrap-3.4.1.min.css">
+    <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="lib/bootstrap/bootstrap-3.4.1.min.js"></script>
     <script type="text/javascript" src="config/conf.js"></script>
     <script type="text/javascript" src="model/Game.js"></script>
     <script type="text/javascript" src="model/Player.js"></script>
@@ -17,17 +22,14 @@
     <title>Title</title>
 </head>
 <body>
-<div class="w3-container">
-    <div class="w3-card">
-        <h4>Joueur 1</h4>
-        <p>Score :<span></span></p>
-        <button class="w3-button w3-white w3-border w3-border-blue" onclick="playCountDown()">Jouer</button>
-    </div>
-</div>
 
-    <h1>Game</h1> <h2>Case Memo</h2>
 
-<canvas id="canv" width="500" height="500"></canvas>
+<h4>Joueur 1</h4>
+<p>Score :<span></span></p>
+<button class="w3-button w3-white w3-border w3-border-blue" onclick="playCountDown()">Jouer</button>
+<h1>Game</h1>
+<h2>Case Memo</h2>
+<canvas id="canv" width="400" height="400"></canvas>
 <div id="countDown"></div>
 <div id="msgToStart"></div>
 
