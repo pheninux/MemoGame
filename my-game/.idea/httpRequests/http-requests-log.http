@@ -1,0 +1,8 @@
+POST http://localhost:4000/save/login
+Accept: */*
+Cache-Control: no-cache
+
+{   "login" : "Pheninux",   "lvl" : 1 ,   "score" : 1 }
+
+###
+

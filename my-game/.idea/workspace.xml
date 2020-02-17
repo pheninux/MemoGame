@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2c2f7dae-e7a3-4445-95c0-45d004e4f181" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="go_game@localhost" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="go_game@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="go_game@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="go_game: schema" type="76f4a085:MysqlImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="go_game@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="go_game: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="players: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" path="$USER_HOME$/Go/SDK/go1.12.7" />
+  <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="false" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1Xlpyf88s52WYVsQoOwSh7vAyWi" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="DefaultGoTemplateProperty" value="Go File" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="configurable.Global.GOPATH.is.expanded" value="true" />
+    <property name="configurable.Project.GOPATH.is.expanded" value="true" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/web" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="com.goide.configuration.GoLibrariesConfigurableProvider" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/web" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cmd/web" />
+      <recent name="$PROJECT_DIR$/web/ui" />
+    </key>
+  </component>
+  <component name="RestClientSettings">
+    <option name="REQUEST_HISTORY">
+      <list>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://localhost:4000" />
+          <option name="urlPath" value="/save/login" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{   &quot;login&quot; : &quot;Pheninux&quot;,   &quot;lvl&quot; : 1 ,   &quot;score&quot; : 1 }" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="go build mygame.com/cmd/web" type="GoApplicationRunConfiguration" factoryName="Go Application" nameIsGenerated="true">
+      <module name="my-game" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <go_parameters value="-i" />
+      <kind value="DIRECTORY" />
+      <filePath value="$PROJECT_DIR$/" />
+      <package value="mygame.com" />
+      <directory value="$PROJECT_DIR$/cmd/web" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2c2f7dae-e7a3-4445-95c0-45d004e4f181" name="Default Changelist" comment="" />
+      <created>1581630791017</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1581630791017</updated>
+      <workItem from="1581630792966" duration="1687000" />
+      <workItem from="1581715965818" duration="4380000" />
+      <workItem from="1581775370650" duration="13687000" />
+      <workItem from="1581855554219" duration="5599000" />
+      <workItem from="1581888483208" duration="6441000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VgoProject">
+    <integration-enabled>true</integration-enabled>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="320" y="96" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1581793250549">
+      <screen x="0" y="23" width="1440" height="822" />
+    </state>
+    <state x="320" y="96" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.821@0.23.1440.821" timestamp="1581631761742" />
+    <state x="320" y="96" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.822@0.23.1440.822" timestamp="1581793250549" />
+    <state x="421" y="243" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1581792908458">
+      <screen x="0" y="23" width="1440" height="822" />
+    </state>
+    <state x="421" y="243" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.821@0.23.1440.821" timestamp="1581777536557" />
+    <state x="421" y="243" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.822@0.23.1440.822" timestamp="1581792908458" />
+    <state x="415" y="69" key="#go_build_rice-box.go" timestamp="1581777440331">
+      <screen x="0" y="23" width="1440" height="821" />
+    </state>
+    <state x="415" y="69" key="#go_build_rice-box.go/0.23.1440.821@0.23.1440.821" timestamp="1581777440331" />
+    <state width="613" height="438" key="DebuggerActiveHint" timestamp="1581894598694">
+      <screen x="0" y="23" width="1440" height="822" />
+    </state>
+    <state width="613" height="438" key="DebuggerActiveHint/0.23.1440.822@0.23.1440.822" timestamp="1581894598694" />
+    <state width="1398" height="303" key="GridCell.Tab.0.bottom" timestamp="1581899476133">
+      <screen x="0" y="23" width="1440" height="811" />
+    </state>
+    <state width="1398" height="253" key="GridCell.Tab.0.bottom/0.23.1440.808@0.23.1440.808" timestamp="1581811546681" />
+    <state width="1398" height="303" key="GridCell.Tab.0.bottom/0.23.1440.811@0.23.1440.811" timestamp="1581899476133" />
+    <state width="1398" height="303" key="GridCell.Tab.0.bottom/0.23.1440.822@0.23.1440.822" timestamp="1581894966737" />
+    <state width="1398" height="303" key="GridCell.Tab.0.center" timestamp="1581899476132">
+      <screen x="0" y="23" width="1440" height="811" />
+    </state>
+    <state width="1398" height="253" key="GridCell.Tab.0.center/0.23.1440.808@0.23.1440.808" timestamp="1581811546680" />
+    <state width="1398" height="303" key="GridCell.Tab.0.center/0.23.1440.811@0.23.1440.811" timestamp="1581899476132" />
+    <state width="1398" height="303" key="GridCell.Tab.0.center/0.23.1440.822@0.23.1440.822" timestamp="1581894966736" />
+    <state width="1398" height="303" key="GridCell.Tab.0.left" timestamp="1581899476131">
+      <screen x="0" y="23" width="1440" height="811" />
+    </state>
+    <state width="1398" height="253" key="GridCell.Tab.0.left/0.23.1440.808@0.23.1440.808" timestamp="1581811546679" />
+    <state width="1398" height="303" key="GridCell.Tab.0.left/0.23.1440.811@0.23.1440.811" timestamp="1581899476131" />
+    <state width="1398" height="303" key="GridCell.Tab.0.left/0.23.1440.822@0.23.1440.822" timestamp="1581894966735" />
+    <state width="1398" height="303" key="GridCell.Tab.0.right" timestamp="1581899476133">
+      <screen x="0" y="23" width="1440" height="811" />
+    </state>
+    <state width="1398" height="253" key="GridCell.Tab.0.right/0.23.1440.808@0.23.1440.808" timestamp="1581811546680" />
+    <state width="1398" height="303" key="GridCell.Tab.0.right/0.23.1440.811@0.23.1440.811" timestamp="1581899476133" />
+    <state width="1398" height="303" key="GridCell.Tab.0.right/0.23.1440.822@0.23.1440.822" timestamp="1581894966736" />
+    <state width="1398" height="303" key="GridCell.Tab.1.bottom" timestamp="1581899476135">
+      <screen x="0" y="23" width="1440" height="811" />
+    </state>
+    <state width="1398" height="253" key="GridCell.Tab.1.bottom/0.23.1440.808@0.23.1440.808" timestamp="1581811546682" />
+    <state width="1398" height="303" key="GridCell.Tab.1.bottom/0.23.1440.811@0.23.1440.811" timestamp="1581899476135" />
+    <state width="1398" height="303" key="GridCell.Tab.1.bottom/0.23.1440.822@0.23.1440.822" timestamp="1581894966738" />
+    <state width="1398" height="303" key="GridCell.Tab.1.center" timestamp="1581899476134">
+      <screen x="0" y="23" width="1440" height="811" />
+    </state>
+    <state width="1398" height="253" key="GridCell.Tab.1.center/0.23.1440.808@0.23.1440.808" timestamp="1581811546681" />
+    <state width="1398" height="303" key="GridCell.Tab.1.center/0.23.1440.811@0.23.1440.811" timestamp="1581899476134" />
+    <state width="1398" height="303" key="GridCell.Tab.1.center/0.23.1440.822@0.23.1440.822" timestamp="1581894966738" />
+    <state width="1398" height="303" key="GridCell.Tab.1.left" timestamp="1581899476134">
+      <screen x="0" y="23" width="1440" height="811" />
+    </state>
+    <state width="1398" height="253" key="GridCell.Tab.1.left/0.23.1440.808@0.23.1440.808" timestamp="1581811546681" />
+    <state width="1398" height="303" key="GridCell.Tab.1.left/0.23.1440.811@0.23.1440.811" timestamp="1581899476134" />
+    <state width="1398" height="303" key="GridCell.Tab.1.left/0.23.1440.822@0.23.1440.822" timestamp="1581894966737" />
+    <state width="1398" height="303" key="GridCell.Tab.1.right" timestamp="1581899476134">
+      <screen x="0" y="23" width="1440" height="811" />
+    </state>
+    <state width="1398" height="253" key="GridCell.Tab.1.right/0.23.1440.808@0.23.1440.808" timestamp="1581811546681" />
+    <state width="1398" height="303" key="GridCell.Tab.1.right/0.23.1440.811@0.23.1440.811" timestamp="1581899476134" />
+    <state width="1398" height="303" key="GridCell.Tab.1.right/0.23.1440.822@0.23.1440.822" timestamp="1581894966738" />
+    <state x="221" y="70" key="SettingsEditor" timestamp="1581630879289">
+      <screen x="0" y="23" width="1440" height="816" />
+    </state>
+    <state x="221" y="70" key="SettingsEditor/0.23.1440.816@0.23.1440.816" timestamp="1581630879289" />
+    <state x="397" y="266" key="com.intellij.ide.util.TipDialog" timestamp="1581873337025">
+      <screen x="0" y="23" width="1440" height="825" />
+    </state>
+    <state x="397" y="263" key="com.intellij.ide.util.TipDialog/0.23.1440.816@0.23.1440.816" timestamp="1581716170842" />
+    <state x="397" y="266" key="com.intellij.ide.util.TipDialog/0.23.1440.825@0.23.1440.825" timestamp="1581873337025" />
+    <state x="385" y="163" width="670" height="676" key="search.everywhere.popup" timestamp="1581716318465">
+      <screen x="0" y="23" width="1440" height="816" />
+    </state>
+    <state x="385" y="163" width="670" height="676" key="search.everywhere.popup/0.23.1440.816@0.23.1440.816" timestamp="1581716318465" />
+    <state x="450" y="352" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1581792901059">
+      <screen x="0" y="23" width="1440" height="822" />
+    </state>
+    <state x="450" y="352" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.23.1440.822@0.23.1440.822" timestamp="1581792901059" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/cmd/web/handlers.go</url>
+          <line>17</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/cmd/web/handlers.go</url>
+          <line>41</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/pkg/models/mysql/dbPlayer.go</url>
+          <line>5</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/pkg/models/mysql/dbPlayer.go</url>
+          <line>6</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/cmd/web/handlers.go</url>
+          <line>23</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/cmd/web/handlers.go</url>
+          <line>27</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/cmd/web/handlers.go</url>
+          <line>43</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="GoApplicationRunConfiguration">
+        <watch expression="string(b)" language="go" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>
