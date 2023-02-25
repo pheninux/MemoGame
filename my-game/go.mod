@@ -13,6 +13,5 @@ require (
 	github.com/justinas/alice v1.2.0
 	github.com/lib/pq v1.3.0 // indirect
 	github.com/mattn/go-sqlite3 v2.0.3+incompatible // indirect
-	golang.org/x/crypto v0.0.0-20200214034016-1d94cc7ab1c6 // indirect
-	google.golang.org/appengine v1.6.5 // indirect
+	golang.org/x/crypto v0.1.0 // indirect
 )
